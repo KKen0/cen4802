@@ -15,12 +15,17 @@ public class PurchaseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
         double price = Double.parseDouble(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-        double total = price * quantity;
+        double subtotal = price * quantity;
+
+        double taxRate = 0.065;
+        double salesTax = subtotal * taxRate;
+
+        double finalTotal = subtotal + salesTax;
 
         response.setContentType("text/html");
 
@@ -39,7 +44,14 @@ public class PurchaseServlet extends HttpServlet {
         out.println("<p>Price: $" + String.format("%.2f", price) + "</p>");
         out.println("<p>Quantity: " + quantity + "</p>");
 
-        out.println("<h2>Total: $" + String.format("%.2f", total) + "</h2>");
+        out.println("<p>Subtotal: $" +
+                String.format("%.2f", subtotal) + "</p>");
+
+        out.println("<p>Sales Tax (6.5%): $" +
+                String.format("%.2f", salesTax) + "</p>");
+
+        out.println("<h2>Final Total: $" +
+                String.format("%.2f", finalTotal) + "</h2>");
 
         out.println("<a href='index.jsp'>Calculate Another Purchase</a>");
 
