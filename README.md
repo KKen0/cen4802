@@ -47,3 +47,34 @@ http://localhost:8080/cen4802/
 For Assignment 2, the application was modified and rebuilt using Maven.
 The newly generated WAR artifact was redeployed to Apache Tomcat to verify
 that the updated application reflected the source-code changes.
+
+## Unit Testing
+
+This project uses JUnit 5 for automated unit testing.
+
+The unit tests are located in:
+
+src/test/java/org/example/cen4802/PurchaseCalculatorTest.java
+
+The tests verify:
+
+- Purchase subtotal calculations
+- 6.5% sales tax calculations
+- Final total calculations
+- Decimal-price input scenarios
+
+To execute the unit tests separately, run:
+
+mvn test
+
+To run the complete automated build, including the unit tests, run:
+
+mvn clean package
+
+During the Maven build, the JUnit tests are executed automatically before the
+application is packaged as a WAR file.
+
+For Assignment 3, a deliberate change was made to the sales tax rate to verify
+that the tests could detect incorrect application behavior. After the test
+failure was identified, the correct 6.5% tax rate was restored and the complete
+test suite passed successfully.

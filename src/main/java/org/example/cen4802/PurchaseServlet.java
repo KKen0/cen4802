@@ -20,12 +20,11 @@ public class PurchaseServlet extends HttpServlet {
         double price = Double.parseDouble(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-        double subtotal = price * quantity;
+        PurchaseCalculator calculator = new PurchaseCalculator();
 
-        double taxRate = 0.065;
-        double salesTax = subtotal * taxRate;
-
-        double finalTotal = subtotal + salesTax;
+        double subtotal = calculator.calculateSubtotal(price, quantity);
+        double salesTax = calculator.calculateSalesTax(subtotal);
+        double finalTotal = calculator.calculateFinalTotal(subtotal);
 
         response.setContentType("text/html");
 
