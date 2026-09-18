@@ -78,3 +78,13 @@ For Assignment 3, a deliberate change was made to the sales tax rate to verify
 that the tests could detect incorrect application behavior. After the test
 failure was identified, the correct 6.5% tax rate was restored and the complete
 test suite passed successfully.
+
+## Continuous Integration
+
+This project uses GitHub Actions for continuous integration. The workflow is stored in `.github/workflows/ci.yml` and runs automatically when changes are pushed to the `main` branch.
+
+The CI workflow checks out the repository, sets up Java 21, and runs:
+
+mvn -B clean package
+
+This command compiles the application, runs the JUnit tests, and packages the project as a WAR file. After a successful build, the WAR file is uploaded as a GitHub Actions artifact.
