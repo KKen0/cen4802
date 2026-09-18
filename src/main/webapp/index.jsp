@@ -8,9 +8,9 @@
 
 <body>
 
-<h1>Purchase Calculator - Automated Build Version</h1>
+<h1>Purchase Calculator - Continuous Integration Version</h1>
 
-<p>This application was updated and rebuilt using Maven.</p>
+<p>This version is built and tested automatically with GitHub Actions.</p>
 
 <p>Enter the price of an item and the quantity you would like to purchase.</p>
 
