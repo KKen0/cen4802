@@ -29,3 +29,15 @@ jobs:
         with:
           name: cen4802-war
           path: target/*.war
+
+      - name: Build Docker image
+        run: docker build -t cen4802-app:latest -t cen4802-app:${{ github.sha }} .
+
+      - name: Save Docker image
+        run: docker save cen4802-app:latest cen4802-app:${{ github.sha }} -o cen4802-app.tar
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cen4802-docker-image
+          path: cen4802-app.tar
