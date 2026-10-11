@@ -41,4 +41,22 @@ public class PurchaseCalculatorTest {
 
         assertEquals(29.00, result, 0.001);
     }
+
+    @Test
+    void calculateDiscount_withTenPercent_returnsCorrectDiscount() {
+        PurchaseCalculator calculator = new PurchaseCalculator();
+
+        double result = calculator.calculateDiscount(100.00, 10.00);
+
+        assertEquals(10.00, result, 0.001);
+    }
+
+    @Test
+    void calculateFinalTotal_withDiscount_returnsDiscountedTotalPlusTax() {
+        PurchaseCalculator calculator = new PurchaseCalculator();
+
+        double result = calculator.calculateFinalTotal(100.00, 10.00);
+
+        assertEquals(95.85, result, 0.001);
+    }
 }
