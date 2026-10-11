@@ -17,7 +17,7 @@ public class PurchaseCalculator {
     }
 
     public double calculateDiscount(double subtotal, double discountPercent) {
-        return subtotal * (discountPercent / 100.0);
+        return subtotal * (discountPercent / 10.0);
     }
 
     public double calculateFinalTotal(double subtotal, double discountPercent) {
