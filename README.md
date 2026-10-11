@@ -88,3 +88,56 @@ The CI workflow checks out the repository, sets up Java 21, and runs:
 mvn -B clean package
 
 This command compiles the application, runs the JUnit tests, and packages the project as a WAR file. After a successful build, the WAR file is uploaded as a GitHub Actions artifact.
+
+## Application Containerization
+
+This project uses Docker to run the Java web application inside a container.
+
+The application is first built and packaged using Maven:
+
+mvn clean package
+
+This command compiles the project, runs the JUnit tests, and produces the WAR file used by the Docker image.
+
+The Docker image is built with:
+
+docker build -t cen4802-app .
+
+The container is started with:
+
+docker run -d --name cen4802-container -p 8081:8080 cen4802-app
+
+The application can then be accessed at:
+
+http://localhost:8081/cen4802/
+
+## Midterm Project - Integrated CI and Containerization Workflow
+
+For the Midterm Project, the Purchase Calculator was updated with a new
+discount calculation feature.
+
+The user can enter an item price, quantity, and discount percentage. The
+application calculates:
+
+- Purchase subtotal
+- Discount amount
+- Sales tax on the discounted subtotal
+- Final total
+
+Additional JUnit tests were added to verify the discount calculation and the
+final total after the discount is applied.
+
+The project uses the existing Maven build process to compile the application,
+run the automated unit tests, and package the application as a WAR file.
+
+GitHub Actions is used for Continuous Integration. The CI workflow automatically
+builds, tests, and packages the application from the version-controlled source.
+
+The Midterm Project also integrates Docker with the CI workflow so that a
+container image is created only after the Maven build and unit tests complete
+successfully.
+
+The complete workflow is:
+
+Source Code -> Maven Build -> Unit Tests -> WAR Package -> Docker Image ->
+Running Container

@@ -19,12 +19,18 @@ public class PurchaseServlet extends HttpServlet {
 
         double price = Double.parseDouble(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
+        double discountPercent = Double.parseDouble(request.getParameter("discount"));
 
         PurchaseCalculator calculator = new PurchaseCalculator();
 
         double subtotal = calculator.calculateSubtotal(price, quantity);
-        double salesTax = calculator.calculateSalesTax(subtotal);
-        double finalTotal = calculator.calculateFinalTotal(subtotal);
+        double discountAmount =
+                calculator.calculateDiscount(subtotal, discountPercent);
+
+        double discountedSubtotal = subtotal - discountAmount;
+        double salesTax = calculator.calculateSalesTax(discountedSubtotal);
+        double finalTotal =
+                calculator.calculateFinalTotal(subtotal, discountPercent);
 
         response.setContentType("text/html");
 
@@ -45,6 +51,10 @@ public class PurchaseServlet extends HttpServlet {
 
         out.println("<p>Subtotal: $" +
                 String.format("%.2f", subtotal) + "</p>");
+
+        out.println("<p>Discount (" +
+                String.format("%.2f", discountPercent) + "%): -$" +
+                String.format("%.2f", discountAmount) + "</p>");
 
         out.println("<p>Sales Tax (6.5%): $" +
                 String.format("%.2f", salesTax) + "</p>");

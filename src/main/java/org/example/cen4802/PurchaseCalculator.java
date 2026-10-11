@@ -15,4 +15,15 @@ public class PurchaseCalculator {
     public double calculateFinalTotal(double subtotal) {
         return subtotal + calculateSalesTax(subtotal);
     }
+
+    public double calculateDiscount(double subtotal, double discountPercent) {
+        return subtotal * (discountPercent / 100.0);
+    }
+
+    public double calculateFinalTotal(double subtotal, double discountPercent) {
+        double discount = calculateDiscount(subtotal, discountPercent);
+        double discountedSubtotal = subtotal - discount;
+
+        return discountedSubtotal + calculateSalesTax(discountedSubtotal);
+    }
 }

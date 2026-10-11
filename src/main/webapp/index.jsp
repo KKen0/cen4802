@@ -8,9 +8,9 @@
 
 <body>
 
-<h1>Purchase Calculator - Continuous Integration Version</h1>
+<h1>Purchase Calculator - Docker Container Version</h1>
 
-<p>This version is built and tested automatically with GitHub Actions.</p>
+<p>This updated version is running inside a Docker container.</p>
 
 <p>Enter the price of an item and the quantity you would like to purchase.</p>
 
@@ -37,6 +37,16 @@
 
     <br><br>
 
+    <label for="discount">Discount Percentage:</label>
+    <input
+            type="number"
+            id="discount"
+            name="discount"
+            min="0"
+            max="100"
+            step="0.01"
+            value="0"
+            required>
     <button type="submit">Calculate Total</button>
 
 </form>
