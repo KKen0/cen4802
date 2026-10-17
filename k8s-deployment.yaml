@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cen4802-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cen4802
+  template:
+    metadata:
+      labels:
+        app: cen4802
+    spec:
+      containers:
+        - name: cen4802-app
+          image: cen4802-app:ec933e7e1d8743a662fbac275086dc173fc5c409
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080

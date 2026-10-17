@@ -141,3 +141,25 @@ The complete workflow is:
 
 Source Code -> Maven Build -> Unit Tests -> WAR Package -> Docker Image ->
 Running Container
+
+## Assignment 6 - Kubernetes Application Deployment
+
+For Assignment 6, the Purchase Calculator was deployed to a local Kubernetes
+cluster provided by Docker Desktop.
+
+The deployment uses the Docker image created through the previous CI workflow:
+
+`cen4802-app:ec933e7e1d8743a662fbac275086dc173fc5c409`
+
+The Kubernetes configuration is stored in:
+
+- `k8s-deployment.yaml`
+- `k8s-service.yaml`
+
+The deployment starts with one application replica using container port 8080.
+
+To deploy the application:
+
+```bash
+kubectl apply -f k8s-deployment.yaml
+kubectl apply -f k8s-service.yaml
