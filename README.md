@@ -163,3 +163,35 @@ To deploy the application:
 ```bash
 kubectl apply -f k8s-deployment.yaml
 kubectl apply -f k8s-service.yaml
+
+## Assignment 7 - Application Logging
+
+For Assignment 7, logging was added to the Purchase Calculator using Java's
+built-in `java.util.logging` framework.
+
+The logging configuration is stored in:
+
+`src/main/resources/logging.properties`
+
+Logs are written to the console so they can be viewed through Docker using
+`docker logs`.
+
+The application uses multiple logging levels:
+
+- `FINE` for detailed request information
+- `INFO` for normal purchase calculations
+- `WARNING` for unusually high discounts
+- `SEVERE` for invalid input or errors
+
+The application records information such as the item price, quantity, discount,
+subtotal, sales tax, and final total.
+
+A controlled invalid request was used to generate a `SEVERE` log entry and
+demonstrate how errors can be investigated from the logs.
+
+More than 100 application log entries were generated through normal application
+requests. The logs were filtered using PowerShell and Docker commands to isolate
+`WARNING` and `SEVERE` entries.
+
+The minimum logging level was also changed from `INFO` to `FINE` to demonstrate
+how the logging configuration controls the amount of information recorded.
