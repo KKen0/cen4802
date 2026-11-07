@@ -234,3 +234,39 @@ returned to approximately `0.11%`.
 
 The `docker top` command was also used to inspect the container and verify that
 the Java/Tomcat process was still running correctly.
+
+## Assignment 9 - Software Profiling
+
+For Assignment 9, software profiling was added to the Purchase Calculator using
+Java Flight Recorder (JFR).
+
+The application was profiled while running inside the:
+
+`cen4802-logging-container`
+
+Java Flight Recorder was started using `jcmd` and profiling information was
+collected while the application was processing multiple HTTP requests.
+
+The profiling information included:
+
+- Object allocation activity
+- Thread activity
+- CPU-related events
+- Heap and memory activity
+- JVM execution information
+
+A workload was generated using multiple PowerShell background jobs that sent
+HTTP POST requests to the Purchase Calculator while JFR was recording.
+
+The profiling results showed that a large allocation hotspot was associated with
+`java.util.HashMap.newNode`. Further investigation showed that this allocation
+was related to JVM/JFR activity rather than directly to the Purchase Calculator
+calculation logic.
+
+A second profiling session was used to collect cleaner allocation information.
+The results showed allocation activity related to console logging, including
+`StreamEncoder.write` and `SimpleFormatter.format`.
+
+Based on these results, one potential performance improvement would be to use
+the `INFO` logging level instead of `FINE` during normal application operation
+to reduce detailed logging and formatting overhead.
