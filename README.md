@@ -255,6 +255,48 @@ The profiling information included:
 - Heap and memory activity
 - JVM execution information
 
+## Assignment 10 - Infrastructure as Code
+
+For Assignment 10, Infrastructure as Code was added to the Purchase Calculator
+using Terraform.
+
+The Terraform configuration is stored in:
+
+`terraform/main.tf`
+
+Terraform was configured with the Docker provider and used the existing:
+
+`cen4802-logging:latest`
+
+Docker image.
+
+The infrastructure managed by Terraform included:
+
+- A Docker network
+- A Purchase Calculator container
+- Port mapping
+- Container memory settings
+- Container restart configuration
+
+The Terraform configuration was validated and an execution plan was reviewed
+before the infrastructure was created.
+
+Terraform successfully created the Docker network and container, and the
+Purchase Calculator was verified to be working through port `8084`.
+
+A configuration change was then made by increasing the container memory from
+`256 MB` to `384 MB`.
+
+Terraform detected the change and updated the existing container without
+creating a new network or unrelated resources.
+
+The updated memory limit was verified using Docker after the change was
+applied.
+
+Finally, Terraform was used to destroy the infrastructure created for the
+assignment. Docker commands were then used to verify that the managed container
+and network were successfully removed.
+
 A workload was generated using multiple PowerShell background jobs that sent
 HTTP POST requests to the Purchase Calculator while JFR was recording.
 

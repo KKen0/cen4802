@@ -29,3 +29,12 @@ target/
 # IntelliJ IDEA
 .idea/
 *.iml
+
+# Terraform generated files
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/.terraform.tfstate.lock.info
+
+# Java Flight Recorder files
+*.jfr
